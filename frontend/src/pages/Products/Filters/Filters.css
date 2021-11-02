@@ -1,0 +1,24 @@
+.rating-outer {
+	display: inline-block;
+	position: relative;
+	font-family: Material Icons;
+	color: #fdcc0d;
+ }
+ 
+ .rating-outer::before {
+	content: '\e83a \e83a \e83a \e83a \e83a';
+ }
+ 
+ .rating-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 0;
+ }
+ 
+ .rating-inner::before {
+	content: '\e838 \e838 \e838 \e838 \e838';
+	color: #f8ce0b;
+ }

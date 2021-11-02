@@ -1,0 +1,35 @@
+{
+  "name": "mern_stack-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "heroku-postbuild": "cd frontend && npm install && npm run build",
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node backend/server.js"
+  },
+  "author": "NGUYEN ANH NHUT",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dateformat": "^5.0.2",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.12",
+    "multer": "^1.4.3",
+    "node": "^16.13.0",
+    "qs": "^6.10.1",
+    "uuidv4": "^6.2.12"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  },
+  "engines": {
+    "node": "14.15.4",
+    "npm": "7.24.0"
+  }
+}

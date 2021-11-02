@@ -1,0 +1,43 @@
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Poppins', sans-serif !important;
+	z-index: 1;
+}
+input:focus{
+	outline: 0 !important;
+	box-shadow: none !important;
+}
+select:focus{
+	outline: 0 !important;
+	box-shadow: none !important;
+}
+textarea:focus{
+	outline: 0 !important;
+	box-shadow: none !important;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dropdown{
+	position: relative;
+}
+.dropdown .dropdown-menu {
+	position: absolute;
+	opacity: 0;
+	top: 25px;
+	left: 0;
+	display:none;
+	z-index: 10;
+	transition: all .5 ease-in-out;
+}
+.dropdown:hover .dropdown-menu{
+	display:block;
+	opacity: 1;
+}

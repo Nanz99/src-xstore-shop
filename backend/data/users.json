@@ -1,0 +1,14 @@
+[
+  {
+    "isAdmin": true,
+    "name": "Anh Nhựt",
+    "email": "anhnhut@gmail.com",
+    "password": "$2a$08$Xyt97WDSaUPS9rLawW/6XulXqu0v0xIZcToJVr7j56Qiq8IbS2wx2"
+  },
+  {
+    "isAdmin": true,
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "password": "$2a$08$YdpmER0Q65x7FoGNtboJmORA0/3ZcPXnTmXSFPPndZQYepONd.V72"
+  }
+]

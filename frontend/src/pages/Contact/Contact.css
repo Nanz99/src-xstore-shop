@@ -1,0 +1,53 @@
+.contactform__container {
+	position: relative;
+	padding: 70px 80px;
+	display: block;
+ }
+ .contactform__container .contactform__wrapper {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	grid-gap: 20px 30px;
+ }
+ .contactform__container .contactform__wrapper .contact__form h3 {
+	font-size: 18px;
+	color: #333;
+	letter-spacing: 1px;
+	font-weight: 400;
+	margin-bottom: 40px;
+ }
+ .contactform__container .contactform__wrapper .contact__form .contact__form__content {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-gap: 20px 30px;
+ }
+ .contactform__container .contactform__wrapper .contact__form .contact__form__content .form-control {
+	margin-bottom: 22px;
+	border-radius: 0;
+	font-size: 14px;
+	padding: 12px;
+ }
+
+
+ .contactform__container .contactform__wrapper .contact__info h3 {
+	font-size: 18px;
+	color: #333;
+	letter-spacing: 1px;
+	font-weight: 400;
+	margin-bottom: 40px;
+ }
+ .contactform__container .contactform__wrapper .contact__info address div {
+	font-size: 14px;
+	display: block;
+	border-bottom: solid 1px #ddd;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	font-weight: 300;
+ }
+ .contactform__container .contactform__wrapper .contact__info address div strong {
+	margin-right: 5px;
+	color: var(--color-main);
+ }
+ .contactform__container .contactform__wrapper .contact__info address div a {
+	color: #333;
+ }
+ 

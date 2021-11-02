@@ -1,0 +1,91 @@
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+.line-1 {
+	position: relative;
+	top: 50%;
+	margin: 0 auto;
+	border-right: 2px solid rgba(255, 255, 255, 0.75);
+	font-size: 50px;
+	white-space: nowrap;
+	overflow: hidden;
+	/*  */
+	color: rgba(255,255,255,.75);
+	font-family: 'Anonymous Pro', monospace;  
+	overflow: hidden;
+	transform: translateY(-50%);
+}
+
+/* Animation */
+.anim-typewriter {
+	animation: typewriter 4s steps(44) 1s 1 normal both, blinkTextCursor 500ms steps(44) infinite normal;
+	animation-iteration-count: infinite;
+}
+@keyframes typewriter {
+	from {
+		width: 0;
+	}
+	to {
+		width: 18em;
+	}
+}
+@keyframes blinkTextCursor {
+	from {
+		border-right-color: rgba(255, 255, 255, 0.75);
+	}
+	to {
+		border-right-color: transparent;
+	}
+}
+
+
+.text-effect {
+	  display: block;
+	  font-size: 6.5em;
+	  width: 960px;
+	  height: 300px;
+	  margin: auto;
+	  transform: translateY(-50px)
+ }
+ 
+ .text-copy {
+	  fill: none;
+	  stroke: white;
+	  stroke-dasharray: 6% 29%;
+	  stroke-width: 5px;
+	  stroke-dashoffset: 0%;
+	  animation: stroke-offset 5.5s infinite linear;
+ }
+ 
+ .text-copy:nth-child(1){
+	stroke: #4D163D;
+	animation-delay: -1;
+ }
+ 
+ .text-copy:nth-child(2){
+	stroke: #840037;
+	animation-delay: -2s;
+ }
+ 
+ .text-copy:nth-child(3){
+	stroke: #BD0034;
+	animation-delay: -3s;
+ }
+ 
+ .text-copy:nth-child(4){
+	stroke: #BD0034;
+	animation-delay: -4s;
+ }
+ 
+ .text-copy:nth-child(5){
+	stroke: #FDB731;
+	animation-delay: -5s;
+ }
+ 
+ @keyframes stroke-offset{
+	100% {stroke-dashoffset: -35%;}
+ }
+ 
+ 
+ 
+ 
