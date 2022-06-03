@@ -1,0 +1,8 @@
+
+
+.form-input-gr {
+	@apply block w-96 border mt-2 text-15 border-solid border-black py-3 px-4 rounded-md focus:outline-none focus:border-red-1 focus:placeholder-transparent;
+}
+.btn-submit-form{
+	@apply px-8 py-2 bg-transparent border-2 border-solid border-black hover:border-red-1 hover:bg-red-1 hover:text-white
+}

@@ -7,24 +7,24 @@ import Filters from "./Filters/Filters";
 import Sort from "./Sort/Sort";
 import ProductContent from "./ProductContent/ProductContent";
 import { useDispatch, useSelector } from "react-redux";
-import { listProducts } from "../../actions/productActions";
-import Loading from "../../components/Loading/Loading";
+import { listCategories } from "../../actions/productActions";
+
 
 function Products() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listProducts());
+    dispatch(listCategories())
   }, [dispatch]);
-  const { products } = useSelector((state) => state.productList);
- 
-  if (!products) return <Loading />;
+  const { categories } = useSelector((state) => state.productCategory);
+
+  // if (!products) return <Loading />;
   return (
     <div>
       <Meta title="Sản Phẩm" />
       <Breadcrumb title="Sản Phẩm" />
       <div className="py-14 px-8">
         <div className="grid grid-cols-2-20-80 ">
-          <Filters products={products} />
+          <Filters categories={categories} />
           <div className="pl-5"> 
             <Sort />
             <ProductContent />

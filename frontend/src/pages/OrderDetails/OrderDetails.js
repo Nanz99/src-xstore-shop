@@ -1,4 +1,4 @@
-import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+
 import Meta from 'components/Meta/Meta'
 import React from 'react'
 import { useEffect } from 'react';
@@ -24,9 +24,8 @@ function OrderDetails(props) {
 	return (
 		<div>
 			<Meta title="Chi tiết đơn hàng" />
-			<Breadcrumb title={`${order._id}`} order />
-			<div className="px-40 py-20 ">
-				<h2 className="tracking-wider text-3xl mb-10 font-semibold">
+			<div className="">
+				<h2 className="tracking-wider text-2xl mb-10 font-semibold">
 					Mã số đơn hàng : {order._id}
 				</h2>
 

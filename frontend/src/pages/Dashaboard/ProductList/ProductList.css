@@ -1,0 +1,3 @@
+.btn-primary-gr{
+	@apply px-8 py-2 bg-transparent border-2 border-solid border-black hover:border-red-1 hover:bg-red-1 hover:text-white 
+}

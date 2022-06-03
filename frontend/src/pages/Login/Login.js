@@ -27,7 +27,6 @@ function Login(props) {
     if (userInfo) {
       toast.success("🦄 Đăng Nhập Thành Công!")
       props.history.push(redirect);
-      
     }
     if(error) {
       toast.error(error)

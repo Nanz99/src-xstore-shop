@@ -8,6 +8,7 @@
 body {
 	font-family: 'Poppins', sans-serif !important;
 	z-index: 1;
+
 }
 input:focus{
 	outline: 0 !important;

@@ -6,7 +6,7 @@ import Product from "../../../components/Product/Product";
 
 function NewArrivals({ products }) {
   return (
-    <div className="py-14 w-full">
+    <div className="py-14 px-20 w-full">
       <h2 className="text-4xl text-center font-semibold mb-8">New Arrivals</h2>
       <div className="grid grid-cols-4 px-6 ">
         {products &&

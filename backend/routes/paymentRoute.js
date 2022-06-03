@@ -5,18 +5,19 @@ import expressAsyncHandler from "express-async-handler";
 import crypto from "crypto";
 import querystring from "qs";
 import dateFormat from "dateformat";
+import { isAuth } from "../utils";
 
 const paymentRouter = express.Router();
 
 paymentRouter.post(
-  "/create_vnpayurl",
+  "/create_vnpayurl", isAuth,
   expressAsyncHandler((req, res, next) => {
     let ipAddr =
       req.headers["x-forwarded-for"] ||
       req.connection.remoteAddress ||
       req.socket.remoteAddress ||
       req.connection.socket.remoteAddress;
-      
+
     let orderId = req.body.orderId;
     //Thông tin do VNPAY cung 
 
@@ -28,7 +29,7 @@ paymentRouter.post(
     let date = new Date();
 
     let createDate = dateFormat(date, "yyyymmddHHmmss");
-    
+
     let amount = req.body.amount;
     let bankCode = req.body.bankCode;
     let orderInfo = req.body.orderDescription;

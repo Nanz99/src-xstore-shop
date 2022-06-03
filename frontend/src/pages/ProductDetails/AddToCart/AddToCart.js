@@ -74,7 +74,7 @@ function AddToCart({ product }) {
         <div className="flex items-center mb-6">
           <button
             type="button"
-            className="w-8 h-8 flex justify-center items-center rounded-none border border-solid border-black hover:border-red-1 hover:bg-red-1 hover:text-white "
+            className="w-8 h-8 flex justify-center items-center rounded-none border border-solid border-black hover:border-red-1 hover:bg-red-1 hover:text-white"
             onClick={decrease}
           >
             <i className="fa fa-minus"></i>

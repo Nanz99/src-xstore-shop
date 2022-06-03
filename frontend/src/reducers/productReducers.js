@@ -1,6 +1,12 @@
 /** @format */
 
 import {
+  PRODUCT_CATEGORY_LIST_FAIL,
+  PRODUCT_CATEGORY_LIST_REQUEST,
+  PRODUCT_CATEGORY_LIST_SUCCESS,
+  PRODUCT_CREATE_FAIL,
+  PRODUCT_CREATE_REQUEST,
+  PRODUCT_CREATE_SUCCESS,
   PRODUCT_FILTERS_CATEGORY_FAIL,
   PRODUCT_FILTERS_CATEGORY_REQUEST,
   PRODUCT_FILTERS_CATEGORY_SUCCESS,
@@ -56,6 +62,24 @@ export const productListReducer = (
         page: action.payload.page,
       };
     case PRODUCT_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+export const productCategoryListReducer = (
+  state = { loading: true, categories: [] },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_CATEGORY_LIST_REQUEST:
+      return { loading: true };
+    case PRODUCT_CATEGORY_LIST_SUCCESS:
+      return {
+        loading: false,
+        categories: action.payload.categories,
+      };
+    case PRODUCT_CATEGORY_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -215,3 +239,17 @@ export const openModalSearchReducer = (state = { isOpen: false }, action) => {
       return state;
   }
 };
+
+
+export const productCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_CREATE_REQUEST:
+      return { loading: true };
+    case PRODUCT_CREATE_SUCCESS:
+      return { loading: false, success: true };
+    case PRODUCT_CREATE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state;
+  }
+}

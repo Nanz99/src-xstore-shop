@@ -1,11 +1,10 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import TopHeader from "./../TopHeader/TopHeader";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import jwt from "jsonwebtoken";
 import { closeSticky, openSticky, signout } from "../../actions/userActions";
 import { toast } from "react-toastify";
 import { openModalSearch } from "./../../actions/productActions";
@@ -13,19 +12,12 @@ import SearchBox from "../SearchBox/SearchBox";
 import "./Header.css";
 
 function Header() {
-  const { userInfo } = useSelector((state) => state.userSignin);
+  // const { userInfo } = useSelector((state) => state.userSignin);
+  const { userInfo } = useSelector((state) => state.authLogin);
   const { cartItems } = useSelector((state) => state.cart);
-  const [account, setAccount] = useState({});
   const dispatch = useDispatch();
   const { isSticky } = useSelector((state) => state.headerSticky);
-  useEffect(() => {
-    if (userInfo) {
-      jwt.verify(userInfo.token, "somthingsecret", (err, decode) => {
-        setAccount(decode);
-        toast.error(err);
-      });
-    }
-  }, [userInfo]);
+
 
   const handleSticky = () => {
     if (window.pageYOffset > 150) {
@@ -70,7 +62,7 @@ function Header() {
             </li>
             <li className="inline text-15 uppercase pt-10px pb-10px leading-22 text-center px-3">
               <NavLink
-                to="/huong-dan-chinh-sach"
+                to="/policy"
                 activeStyle={{
                   fontWeight: 600,
                 }}
@@ -91,26 +83,36 @@ function Header() {
           </ul>
           <ul className="">
             <li className="inline-block text-xl leading-5 mx-3">
-              {account && userInfo ? (
+              {userInfo ? (
                 <div className="dropdown">
                   <Link
                     to="#"
                     className=" group text-base text-black font-semibold inline-block"
                   >
-                    Hi, {account.name}
+                    Hi, {userInfo?.name}
                   </Link>
-                  <ul className="dropdown-menu w-36 shadow-lg bg-white border border-gray rounded-sm">
+                  <ul className="dropdown-menu w-44 shadow-lg bg-white border border-gray rounded-sm">
+                    {userInfo && userInfo.isAdmin && (
+                      <li>
+                        <Link
+                          to="/dashboard"
+                          className="text-base block p-2 hover:bg-gray transition-all capitalize"
+                        >
+                          Bảng điều khiển
+                        </Link>
+                      </li>
+                    )}
                     <li>
                       <Link
-                        to="/profile"
-                        className="text-base block p-2 hover:bg-gray transition-all"
+                        to="/user/account/profile"
+                        className="text-base block p-2 hover:bg-gray transition-all capitalize"
                       >
-                        Profile
+                        Tài khoản của tôi
                       </Link>
                     </li>
                     <li>
                       <Link
-                        to="/order-history"
+                        to="/user/account/order-history"
                         className="text-base p-2 block hover:bg-gray transition-all"
                       >
                         Đơn Hàng
@@ -131,7 +133,7 @@ function Header() {
                   </ul>
                 </div>
               ) : (
-                <Link to="/dang-nhap">
+                <Link to="/auth">
                   <i className="fa fa-user-circle"></i>
                 </Link>
               )}

@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./assets/styles/css/tailwind.css";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -16,21 +16,27 @@ import GoToTop from "./components/GoToTop/GoToTop";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Products from './pages/Products/Products';
 import OrderComplete from './pages/OrderComplete/OrderComplete';
-import OrderHistory from "./pages/OrderHistory/OrderHistory";
-import Paypal from "./pages/Payment/Paypal";
-import Vnpay from "./pages/Payment/Vnpay";
 import Contact from "./pages/Contact/Contact";
-import { Switch } from 'react-router-dom';
 import PayOrder from "./pages/Payment/PayOrder/PayOrder";
-import OrderDetails from "pages/OrderDetails/OrderDetails";
+import Account from "pages/Account/Account";
+import PrivateRoute from "routes/PrivateRoute/PrivateRoute";
+import AdminRoute from "routes/AdminRoute/AdminRoute";
+import Dashboard from "pages/Dashaboard/Dashboard";
+import Policy from "pages/Policy/Policy";
+import _Login from "pages/Login/_Login";
+import Activate from "pages/Auth/Activate";
+
+
+
 
 
 export default function App() {
+
   return (
     <BrowserRouter>
       <GoToTop />
       <ToastContainer
-        position="top-left"
+        position="top-center"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -44,18 +50,21 @@ export default function App() {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/dang-nhap" component={Login} exact />
+        <Route path="/auth" component={_Login} exact />
+        <Route path="/auth/activate/:token" component={Activate} exact />
         <Route path="/dang-ky" component={Register} exact />
         <Route path="/contact" component={Contact} exact />
+        <Route path="/policy" component={Policy} exact />
         <Route path="/san-pham/:id" component={ProductDetails} exact />
         <Route path="/san-pham" component={Products} exact />
         <Route path="/gio-hang" component={Cart} exact />
         <Route path="/payment" component={Checkout} exact />
         <Route path="/payment/pay-order/:id" component={PayOrder} exact />
-        <Route path="/payment/pay-paypal/:id" component={Paypal} exact />
-        <Route path="/payment/pay-vnpay/:id" component={Vnpay} exact />
-        <Route path="/order-history" component={OrderHistory} exact />
-        <Route path="/order/:id" component={OrderDetails} exact />
-        <Route path="/payment/order-complete/:id" component={OrderComplete} exact/>
+        <Route path="/payment/order-complete/:id" component={OrderComplete} exact />
+        <PrivateRoute path="/user/account" component={Account} />
+
+
+        <AdminRoute path="/dashboard" component={Dashboard} />
       </Switch>
       <ScrollToTop showBelow={250} />
       <Footer />

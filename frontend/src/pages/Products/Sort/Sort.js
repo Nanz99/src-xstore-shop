@@ -7,13 +7,12 @@ import {
   ChevronDownIcon,
 
 } from "@heroicons/react/solid";
-import { sortBestRating, sortNewest, sortPriceHighest, sortPriceLowest } from "../../../actions/productActions";
+import { listProducts } from "../../../actions/productActions";
 
 
 
 const sortOptions = [
   { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
   { name: "Price: Low to High", href: "#", current: false },
   { name: "Price: High to Low", href: "#", current: false },
 ];
@@ -25,19 +24,31 @@ function Sort() {
 	const dispatch = useDispatch();
 	const [sortValue,setSortValue] = useState('')
 	console.log(sortValue)
+	// useEffect(() => {
+	// 	if(sortValue === "Price: Low to High"){
+	// 		dispatch(sortPriceLowest())
+	// 	}
+	// 	if(sortValue === "Price: High to Low"){
+	// 		dispatch(sortPriceHighest())
+	// 	}
+	// 	if(sortValue === "Best Rating"){
+	// 		dispatch(sortBestRating())
+	// 	}
+	// 	if(sortValue === "Newest"){
+	// 		dispatch(sortNewest())
+	// 	}
+	// },[dispatch,sortValue])
 	useEffect(() => {
 		if(sortValue === "Price: Low to High"){
-			dispatch(sortPriceLowest())
+      dispatch(listProducts({ order:'lowest'}))
 		}
 		if(sortValue === "Price: High to Low"){
-			dispatch(sortPriceHighest())
+      dispatch(listProducts({ order: 'highest' }))
 		}
 		if(sortValue === "Best Rating"){
-			dispatch(sortBestRating())
+      dispatch(listProducts({ order: 'toprated' }))
 		}
-		if(sortValue === "Newest"){
-			dispatch(sortNewest())
-		}
+
 	},[dispatch,sortValue])
   return (
     <div className="z-50 relative text-right">

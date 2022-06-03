@@ -1,29 +1,30 @@
-/** @format */
-
-// /** @format */
-
-import { applyMiddleware, combineReducers, compose, createStore } from "redux";
-import thunk from "redux-thunk";
-import { cartReducer } from "./reducers/cartReducers";
+import { authLoginReducer, authSignupReducer } from "reducers/authReducers"
+import { applyMiddleware, combineReducers, compose, createStore } from "redux"
+import thunk from "redux-thunk"
+import { cartReducer } from "./reducers/cartReducers"
 import {
   orderCreateReducer,
   orderDetailsReducer,
   orderPaymentVNPAYReducer,
   orderPayReducer,
   orderMineListReducer,
-} from "./reducers/orderReducers";
+} from "./reducers/orderReducers"
 import {
   openModalSearchReducer,
+  productCategoryListReducer,
+  productCreateReducer,
   productDetailsReducer,
   productFiltersReducer,
   productListReducer,
   productSearchReducer,
-} from "./reducers/productReducers";
+} from "./reducers/productReducers"
 import {
   headerStickyReducer,
+  userDetailsReducer,
   userRegisterReducer,
   userSigninReducer,
-} from "./reducers/userReducers";
+  userUpdateProfileReducer,
+} from "./reducers/userReducers"
 
 const inintialState = {
   userSignin: {
@@ -39,12 +40,14 @@ const inintialState = {
       ? JSON.parse(localStorage.getItem("checkoutDetails"))
       : {},
   },
-};
+}
 
 const reducer = combineReducers({
   productList: productListReducer,
   userSignin: userSigninReducer,
+  authLogin: authLoginReducer,
   userRegister: userRegisterReducer,
+  authSignup: authSignupReducer,
   headerSticky: headerStickyReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
@@ -56,12 +59,16 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   orderPaymentVNPAY: orderPaymentVNPAYReducer,
   orderMineList: orderMineListReducer,
-});
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer,
+  productCreate: productCreateReducer,
+  productCategory: productCategoryListReducer
+})
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
   reducer,
   inintialState,
   composeEnhancer(applyMiddleware(thunk))
-);
+)
 
-export default store;
+export default store

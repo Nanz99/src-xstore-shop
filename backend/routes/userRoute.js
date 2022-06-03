@@ -27,11 +27,20 @@ userRouter.post(
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         res.send({
-          success: true,
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          numberPhone: user.numberPhone,
+          birthday: user.birthday,
+          gender: user.gender,
           token: generateToken(user),
+          accessToken: generateToken(user),
+          success: true,
         });
       }
     }
+    res.status(401).send({ message: 'Invalid email or password' });
   })
 );
 
@@ -56,7 +65,7 @@ userRouter.get(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     user
-      ? res.send({ success: true, user })
+      ? res.send(user)
       : res.status(404).send({ message: "User Not Found" });
   })
 );
@@ -100,19 +109,26 @@ userRouter.put(
   "/profile",
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.user._id);
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
-      if (req.body.password) {
-        user.password = bcrypt.hashSync(req.body.password, 8) || user.password;
-      }
+      user.numberPhone = req.body.numberPhone || user.numberPhone;
+      user.birthday = req.body.birthday || user.birthday;
+      user.gender = req.body.gender || user.gender;
+
+
+      // if (req.body.password) {
+      //   user.password = bcrypt.hashSync(req.body.password, 8) || user.password;
+      // }
       const updatedUser = await user.save();
       res.send({
         _id: updatedUser._id,
         name: updatedUser.name,
         email: updatedUser.email,
         isAdmin: updatedUser.isAdmin,
+        numberPhone: updatedUser.numberPhone,
+        birthday: updatedUser.birthday,
         token: generateToken(updatedUser),
       });
     } else {

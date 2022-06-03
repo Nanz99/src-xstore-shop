@@ -11,19 +11,29 @@
   "author": "NGUYEN ANH NHUT",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.6.2",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.27.1",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dateformat": "^5.0.2",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.2.0",
+    "express-fileupload": "^1.2.1",
+    "express-jwt": "^7.6.2",
+    "express-validator": "^6.14.0",
+    "google-auth-library": "^8.0.2",
     "jsonwebtoken": "^8.5.1",
+    "mailgun-js": "^0.22.0",
     "mongoose": "^5.13.12",
+    "morgan": "^1.10.0",
     "multer": "^1.4.3",
     "node": "^16.13.0",
+    "nodemailer": "^6.7.0",
     "qs": "^6.10.1",
-    "uuidv4": "^6.2.12"
+    "uuidv4": "^6.2.12",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.14"

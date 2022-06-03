@@ -3,24 +3,20 @@
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
 const productImageId = uuidv4()
-
 const data = {
   users: [
     {
-      name: "admin",
+      name : "admin",
       email: "admin@gmail.com",
       password: bcrypt.hashSync("1234", 8),
       isAdmin: true,
+      numberPhone: "0375197640",
+      gender: "Nam",
+      birthday: "01/01/1999"
     },
     {
       name: "Anh Nhựt",
       email: "anhnhut@gmail.com",
-      password: bcrypt.hashSync("1234", 8),
-      isAdmin: true,
-    },
-    {
-      name: "Đông Hồ",
-      email: "dongho@gmail.com",
       password: bcrypt.hashSync("1234", 8),
       isAdmin: true,
     },
@@ -505,7 +501,7 @@ const data = {
           url: "/images/product-15/p15-4.jpg",
         },
       ],
-      category: "Quần tây",
+      category: "Quần Tây",
       price: 266000,
       countInStock: 11,
       rating: 4.2,

@@ -1,106 +1,113 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { getUniqueValues } from "../../../utils/helper";
-import Slider from "rc-slider";
+// import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { useDispatch } from "react-redux";
 import {
-  getProductsByCategory,
-  getProductsByPrice,
-  productFilterByColor,
-} from "../../../actions/productActions";
-import { Disclosure } from "@headlessui/react";
 
-import { MinusSmIcon, PlusSmIcon } from "@heroicons/react/solid";
+  listProducts,
+
+} from "../../../actions/productActions";
+// import { Disclosure } from "@headlessui/react";
+
+// import { MinusSmIcon, PlusSmIcon } from "@heroicons/react/solid";
 import "./Filters.css";
 
-const { createSliderWithTooltip } = Slider;
-const Range = createSliderWithTooltip(Slider.Range);
+// const { createSliderWithTooltip } = Slider;
+// const Range = createSliderWithTooltip(Slider.Range);
 
-const filters = [
-  {
-    id: "color",
-    name: "Color",
-    options: [
-      { value: "#f2f2f2", label: "White", checked: false },
-      { value: "#000000", label: "Black", checked: false },
-      { value: "yellow", label: "yellow", checked: false },
-      { value: "gray", label: "Gray", checked: false },
-      { value: "blue", label: "Blue", checked: false },
-      { value: "red", label: "Red", checked: false },
-    ],
-  },
+// const filters = [
+//   {
+//     id: "color",
+//     name: "Color",
+//     options: [
+//       { value: "#f2f2f2", label: "White", checked: false },
+//       { value: "#000000", label: "Black", checked: false },
+//       { value: "yellow", label: "yellow", checked: false },
+//       { value: "gray", label: "Gray", checked: false },
+//       { value: "blue", label: "Blue", checked: false },
+//       { value: "red", label: "Red", checked: false },
+//     ],
+//   },
 
-  {
-    id: "size",
-    name: "Size",
-    options: [
-      { value: "XS", label: "XS", checked: false },
-      { value: "S", label: "S", checked: false },
-      { value: "M", label: "M", checked: false },
-      { value: "L", label: "L", checked: false },
-      { value: "XL", label: "XL", checked: false },
-    ],
-  },
-];
+//   {
+//     id: "size",
+//     name: "Size",
+//     options: [
+//       { value: "XS", label: "XS", checked: false },
+//       { value: "S", label: "S", checked: false },
+//       { value: "M", label: "M", checked: false },
+//       { value: "L", label: "L", checked: false },
+//       { value: "XL", label: "XL", checked: false },
+//     ],
+//   },
+// ];
 
-function Filters({ products }) {
+function Filters({categories }) {
   const dispatch = useDispatch();
   // const {products} = useSelector(state => state.productList)
   // const [currentPage, setCurrentPage] = useState(1);
 
-  const [price, setPrice] = useState([1, 1000000]);
+  // const [price, setPrice] = useState([1, 1000000]);
   const [category, setCategory] = useState("");
-  // const [rating, setRating] = useState(0);
-
-  const categories = getUniqueValues(products, "category").sort(function (
-    a,
-    b
-  ) {
-    if (a > b) {
-      return -1;
-    }
-    if (a < b) {
-      return 1;
-    }
-    return 0;
-  });
 
   // useEffect(() => {
   //   dispatch(getProductsByRating(rating));
   // }, [dispatch, rating]);
 
-  const [color, setColor] = useState("");
+  // const [color, setColor] = useState("");
+
+//   useEffect(() => {
+//     dispatch(productFilterByColor(color));
+//   }, [dispatch, color]);
+//   useEffect(() => {
+    // dispatch(getProductsByCategory(category));
+//     dispatch(listProducts({ category: category
+// }));
+//   }, [dispatch, category]);
+//   useEffect(() => {
+//     dispatch(getProductsByPrice(price));
+//   }, [dispatch, price]);
+
 
   useEffect(() => {
-    dispatch(productFilterByColor(color));
-  }, [dispatch, color]);
-  useEffect(() => {
-    dispatch(getProductsByCategory(category));
-  }, [dispatch, category]);
-  useEffect(() => {
-    dispatch(getProductsByPrice(price));
-  }, [dispatch, price]);
+    dispatch(listProducts({
+      category: category,
+    }));
+  }, [dispatch, category])
+
+
+
 
   const clearFilter = () => {
-    setPrice([1, 1000000]);
+    // setPrice([1, 1000000]);
     setCategory("");
-    setColor("");
+    // setColor("");
   };
   return (
     <div className="pr-5">
       <div className="mb-4">
         <h2 className="text-xl font-semibold mb-2">Danh Mục Sản Phẩm</h2>
         <ul>
-          {categories.map((item, index) => {
+          {categories?.sort(function (
+            a,
+            b
+          ) {
+            if (a > b) {
+              return -1;
+            }
+            if (a < b) {
+              return 1;
+            }
+            return 0;
+          })?.map((item, index) => {
             return (
               <li
-                className={`${
-                  category === item
+                className={`${category === item
                     ? "block font-semibold text-base px-2 py-1 cursor-pointer "
                     : "block text-base px-2 py-1 cursor-pointer "
-                }`}
+                  }`}
                 key={index}
                 onClick={() => setCategory(item)}
               >
@@ -111,7 +118,7 @@ function Filters({ products }) {
         </ul>
       </div>
 
-      <div className="mb-8">
+      {/* <div className="mb-8">
         <h2 className="text-xl font-semibold mb-8">Giá</h2>
         <Range
           marks={{
@@ -129,7 +136,7 @@ function Filters({ products }) {
           value={price}
           onChange={(price) => setPrice(price)}
         />
-      </div>
+      </div> */}
 
       {/* <div className="mb-4 mt-4">
         <h2 className="text-xl font-semibold mb-4">Đánh Giá</h2>
@@ -157,7 +164,7 @@ function Filters({ products }) {
       </div>
         */}
 
-      <div className="mt-8 block">
+      {/* <div className="mt-8 block">
         <form className="mt-4 ">
           <h3 className="sr-only">Categories</h3>
           {filters.map((section) => (
@@ -210,7 +217,7 @@ function Filters({ products }) {
             </Disclosure>
           ))}
         </form>
-      </div>
+      </div> */}
 
       <div className="pt-10 ">
         <button

@@ -9,6 +9,7 @@ import { listProducts } from "../../actions/productActions";
 import InfoProduct from "./InfoProduct/InfoProduct";
 import ProductSale from "./ProductSale/ProductSale";
 import Meta from "../../components/Meta/Meta";
+import VideoList from "./VideoList/VideoList";
 
 
 function Home() {
@@ -17,7 +18,7 @@ function Home() {
     (state) => state.productList
   );
   useEffect(() => {
-	 dispatch(listProducts())
+	 dispatch(listProducts({ limitProduct : 50}))
   }, [dispatch])
   return (
     <div>
@@ -28,6 +29,7 @@ function Home() {
       <Banner />
 		<InfoProduct/>
     <ProductSale products={products} />
+    <VideoList/>
     </div>
   );
 }

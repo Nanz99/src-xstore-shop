@@ -4,6 +4,12 @@ import axios from "axios";
 import {
   CLOSE_MODAL_SEARCH,
   OPEN_MODAL_SEARCH,
+  PRODUCT_CATEGORY_LIST_FAIL,
+  PRODUCT_CATEGORY_LIST_REQUEST,
+  PRODUCT_CATEGORY_LIST_SUCCESS,
+  PRODUCT_CREATE_FAIL,
+  PRODUCT_CREATE_REQUEST,
+  PRODUCT_CREATE_SUCCESS,
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
@@ -39,49 +45,64 @@ import {
   PRODUCT_SORT_NEWEST_SUCCESS,
 } from "../constants/productConstants";
 
-export const listProducts = () => async (dispatch) => {
-  dispatch({
-    type: PRODUCT_LIST_REQUEST,
-  });
-  try {
-    const { data } = await axios.get("/api/products");
-    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
-  }
-};
+export const listProducts =
+  ({
+    limitProduct = '',
+    pageNumber = '',
+    seller = '',
+    name = '',
+    category = '',
+    order = '',
+    min = 0,
+    max = 0,
+    rating = 0,
+  }) =>
+    async (dispatch) => {
+      dispatch({
+        type: PRODUCT_LIST_REQUEST,
+      });
+      try {
+        const { data } = await axios.get(
+          `/api/products?limitProduct=${limitProduct}&pageNumber=${pageNumber}&seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`
+        );
+        dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+      } catch (error) {
+        dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
+      }
+    };
+
 
 export const getProductsBySearch =
   (keyword = "") =>
-  async (dispatch) => {
-    dispatch({ type: PRODUCT_SEARCH_REQUEST });
-    try {
-      let { data } = await axios.get(`/api/products?keyword=${keyword}`);
+    async (dispatch) => {
+      dispatch({ type: PRODUCT_SEARCH_REQUEST });
+      try {
+        let { data } = await axios.get(`/api/products?keyword=${keyword}`);
 
-      dispatch({ type: PRODUCT_SEARCH_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({
-        type: PRODUCT_SEARCH_FAIL,
-        payload: error.message,
-      });
-    }
-  };
+        dispatch({ type: PRODUCT_SEARCH_SUCCESS, payload: data });
+      } catch (error) {
+        dispatch({
+          type: PRODUCT_SEARCH_FAIL,
+          payload: error.message,
+        });
+      }
+    };
 
 export const getProductsByCategory =
   (category = "") =>
-  async (dispatch) => {
-    dispatch({ type: PRODUCT_FILTERS_CATEGORY_REQUEST });
-    try {
-      let { data } = await axios.get(`/api/products?category=${category}`);
+    async (dispatch) => {
+      dispatch({ type: PRODUCT_FILTERS_CATEGORY_REQUEST });
+      try {
+        let { data } = await axios.get(`/api/products?category=${category}`);
 
-      dispatch({ type: PRODUCT_FILTERS_CATEGORY_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({
-        type: PRODUCT_FILTERS_CATEGORY_FAIL,
-        payload: error.message,
-      });
-    }
-  };
+        dispatch({ type: PRODUCT_FILTERS_CATEGORY_SUCCESS, payload: data });
+      } catch (error) {
+        dispatch({
+          type: PRODUCT_FILTERS_CATEGORY_FAIL,
+          payload: error.message,
+        });
+      }
+    };
 export const getProductsByPrice = (price) => async (dispatch) => {
   dispatch({ type: PRODUCT_FILTERS_PRICE_REQUEST });
   try {
@@ -144,8 +165,8 @@ export const sortPriceLowest = () => async (dispatch) => {
   });
   try {
     const { data } = await axios.get(`/api/products`);
-    
-    dispatch({ type: PRODUCT_PRICE_LOWEST_SUCCESS, payload: data});
+
+    dispatch({ type: PRODUCT_PRICE_LOWEST_SUCCESS, payload: data });
     console.log(data)
   } catch (error) {
     dispatch({
@@ -165,9 +186,9 @@ export const sortPriceHighest = () => async (dispatch) => {
   });
   try {
     const { data } = await axios.get(`/api/products`);
-    
-    dispatch({ type: PRODUCT_PRICE_HIGHEST_SUCCESS, payload: data});
-   
+
+    dispatch({ type: PRODUCT_PRICE_HIGHEST_SUCCESS, payload: data });
+
   } catch (error) {
     dispatch({
       type: PRODUCT_PRICE_HIGHEST_FAIL,
@@ -185,8 +206,8 @@ export const productFilterByColor = (color) => async (dispatch) => {
   });
   try {
     const { data } = await axios.get(`/api/products`);
-    
-    dispatch({ type: PRODUCT_FILTERS_COLOR_SUCCESS, payload: {data, color }});
+
+    dispatch({ type: PRODUCT_FILTERS_COLOR_SUCCESS, payload: { data, color } });
   } catch (error) {
     dispatch({
       type: PRODUCT_FILTERS_COLOR_FAIL,
@@ -205,9 +226,9 @@ export const sortBestRating = () => async (dispatch) => {
   });
   try {
     const { data } = await axios.get(`/api/products`);
-    
-    dispatch({ type: PRODUCT_SORT_BEST_RATING_SUCCESS, payload: data});
-   
+
+    dispatch({ type: PRODUCT_SORT_BEST_RATING_SUCCESS, payload: data });
+
   } catch (error) {
     dispatch({
       type: PRODUCT_SORT_BEST_RATING_FAIL,
@@ -224,9 +245,9 @@ export const sortNewest = () => async (dispatch) => {
   });
   try {
     const { data } = await axios.get(`/api/products`);
-    
-    dispatch({ type: PRODUCT_SORT_NEWEST_SUCCESS, payload: data});
-   
+
+    dispatch({ type: PRODUCT_SORT_NEWEST_SUCCESS, payload: data });
+
   } catch (error) {
     dispatch({
       type: PRODUCT_SORT_NEWEST_FAIL,
@@ -237,3 +258,47 @@ export const sortNewest = () => async (dispatch) => {
     });
   }
 };
+export const listCategories = () => async (dispatch) => {
+  dispatch({
+    type: PRODUCT_CATEGORY_LIST_REQUEST,
+  });
+  try {
+    const { data } = await axios.get(`/api/products/categories`);
+
+    dispatch({ type: PRODUCT_CATEGORY_LIST_SUCCESS, payload: data });
+
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_CATEGORY_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+
+export const createProduct = (productData) => async (dispatch, getState) => {
+  dispatch({ type: PRODUCT_CREATE_REQUEST, payload: productData })
+  const { userSignin: { userInfo } } = getState();
+  try {
+    const { data } = await axios.post('/api/products/add', productData, {
+      headers: { 
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}` 
+      }
+    })
+    dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data})
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
+
+

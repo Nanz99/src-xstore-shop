@@ -14,10 +14,13 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { formatPrice } from "../../utils/helper";
 import dateFormat from "dateformat";
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor:" #f4f5f7",
+    color: "#111",
+    border: theme.palette.common.gray-1,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -33,7 +36,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 function OrderHistory(props) {
-  const { loading,orders } = useSelector(
+  const { loading, orders } = useSelector(
     (state) => state.orderMineList
   );
   const dispatch = useDispatch();
@@ -41,18 +44,17 @@ function OrderHistory(props) {
     dispatch(listOrderMine());
   }, [dispatch]);
   return (
-    <div className="container py-16 px-20">
-      <h1 className="text-3xl font-semibold mb-7 tracking-wider">Đơn Hàng Đã Đặt</h1>
+    <div className="container">
       {loading ? (
         <Loading />
-      ) :(
+      ) : (
         <TableContainer className="rounded-none" component={Paper}>
           <Table sx={{ with: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell align="center">STT</StyledTableCell>
+                {/* <StyledTableCell align="center">STT</StyledTableCell> */}
                 <StyledTableCell align="center">
-                  Thời gian tạo đơn hàng
+                  Thời gian
                 </StyledTableCell>
                 <StyledTableCell align="center">Tổng Đơn Hàng</StyledTableCell>
                 <StyledTableCell align="center">Thanh Toán</StyledTableCell>
@@ -63,12 +65,12 @@ function OrderHistory(props) {
             </TableHead>
             <TableBody>
               {orders &&
-                orders.map((item, index) => {
+                orders.filter(item => item.isPaid === true).map((item, index) => {
                   return (
                     <StyledTableRow key={index}>
-                      <StyledTableCell align="center" className="bg-white">
+                      {/* <StyledTableCell align="center" className="bg-white">
                         {index + 1}
-                      </StyledTableCell>
+                      </StyledTableCell> */}
                       <StyledTableCell align="center" className="bg-white">
                         <div>
                           {dateFormat(item.createdAt, "HH:MM dd-mm-yyyy")}
